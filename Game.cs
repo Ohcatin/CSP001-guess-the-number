@@ -1,40 +1,66 @@
 using System;
+using System.Collections.Generic;
 
 public class Game
 {
-    private readonly Player _player;
-    private readonly int _secretNumber;
-    private bool _correctGuess;
+    private Player _humanPlayer;
+    private Player _AIPlayer;
+    private int _secretNumber;
 
-    public Game(Player player)
+    public Game(string humanPlayerName, string AIPlayerName)
     {
-        _player = player;
-        _secretNumber = new Random().Next(1, 101); // Genera un número aleatorio entre 1 y 100
-        _correctGuess = false;
+        _humanPlayer = new HumanPlayer(humanPlayerName);
+        _AIPlayer = new AIPlayer(AIPlayerName);
+        _secretNumber = RandomNumberGenerator();
     }
 
-    public void Play()
+    public void Start()
     {
-        Console.WriteLine($"¡Bienvenido al juego de adivinar el número, {_player.Name}!");
+        Console.WriteLine($"¡Bienvenido al juego de adivinar el número, {_humanPlayer.Name}!");
         Console.WriteLine("Intenta adivinar un número entre 1 y 100.");
 
-        while (!_correctGuess)
+        bool humanTurn = true;
+        while (true)
         {
-            _player.MakeGuess(); // Solicitar al jugador que haga un intento
-
-            if (_player.LastGuess == _secretNumber)
+            if (humanTurn)
             {
-                Console.WriteLine("¡Felicidades! ¡Has adivinado el número secreto!");
-                _correctGuess = true;
-            }
-            else if (_player.LastGuess < _secretNumber)
-            {
-                Console.WriteLine("El número secreto es mayor que tu intento.");
+                _humanPlayer.MakeGuess();
+                if (CheckGuess(_humanPlayer))
+                    break;
             }
             else
             {
-                Console.WriteLine("El número secreto es menor que tu intento.");
+                _AIPlayer.MakeGuess();
+                if (CheckGuess(_AIPlayer))
+                    break;
             }
+            humanTurn = !humanTurn;
         }
+    }
+
+    private int RandomNumberGenerator()
+    {
+        Random random = new Random();
+        return random.Next(1, 101);
+    }
+
+    private bool CheckGuess(Player player)
+    {
+        List<int> predictions = player.GetPredictions();
+        int lastGuess = predictions[predictions.Count - 1];
+        if (lastGuess == _secretNumber)
+        {
+            Console.WriteLine($"¡Felicidades {player.Name}! ¡Has adivinado el número secreto!");
+            return true;
+        }
+        else if (lastGuess < _secretNumber)
+        {
+            Console.WriteLine($"El número secreto es mayor que el intento de {player.Name}.");
+        }
+        else
+        {
+            Console.WriteLine($"El número secreto es menor que el intento de {player.Name}.");
+        }
+        return false;
     }
 }

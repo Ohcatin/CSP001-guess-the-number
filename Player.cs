@@ -1,30 +1,20 @@
-using System;
+using System.Collections.Generic;
 
-public class Player
+public abstract class Player
 {
     public string Name { get; }
-    public int LastGuess { get; private set; }
+    protected List<int> Predictions { get; }
 
-    public Player(string name)
+    protected Player(string name)
     {
         Name = name;
-        LastGuess = 0;
+        Predictions = new List<int>();
     }
 
-    public void MakeGuess()
-{
-    Console.Write($"Hola {Name}, introduce tu intento: ");
-    string input = Console.ReadLine();
-    int guess;
+    public abstract void MakeGuess();
 
-    while (!int.TryParse(input, out guess))
+    public List<int> GetPredictions()
     {
-        Console.WriteLine("Por favor, introduce un número ");
-        Console.Write($"Hola {Name}, introduce tu intento: ");
-        input = Console.ReadLine();
+        return Predictions;
     }
-
-    LastGuess = guess;
-}
-
 }
