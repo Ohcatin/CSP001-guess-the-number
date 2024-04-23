@@ -8,6 +8,9 @@ public class HumanPlayer : Player
 
     public override void MakeGuess()
     {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("--------------------------------------------------");
+        Console.ResetColor();
         Console.ForegroundColor = ConsoleColor.DarkRed;
         Console.Write($"Hola {Name}, por favor introduce tu intento: ");
         Console.ResetColor();

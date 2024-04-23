@@ -44,7 +44,7 @@ public class Game
         return random.Next(1, 101);
     }
 
-    private bool CheckGuess(Player player)
+    public bool CheckGuess(Player player)
     {
         List<int> predictions = player.GetPredictions();
         int lastGuess = predictions[predictions.Count - 1];

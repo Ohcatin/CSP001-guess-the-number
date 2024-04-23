@@ -13,8 +13,11 @@ public class AIPlayer : Player
     {
         int guess = _random.Next(1, 101);
         Predictions.Add(guess);
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("--------------------------------------------------");
+        Console.ResetColor();
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"La IA {Name} hace una predicción: {guess}");
+        Console.WriteLine($"{Name} hace una predicción: {guess}");
         Console.ResetColor();
     }
 }

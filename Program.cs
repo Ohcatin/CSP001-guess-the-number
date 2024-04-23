@@ -8,15 +8,10 @@ class Program
         Console.ForegroundColor = ConsoleColor.DarkRed;
         Console.Write("Por favor, ingresa tu nombre: ");
         Console.ResetColor();
-        string? playerName = Console.ReadLine() ?? ""; // Usar coalescencia nula para evitar valores nulos
-
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Write("Por favor, ingresa el nombre de la IA: ");
-        Console.ResetColor();
-        string? AIPlayerName = Console.ReadLine() ?? ""; // Usar coalescencia nula para evitar valores nulos
-
+        string? playerName = Console.ReadLine() ?? ""; 
+        
         Player player = new HumanPlayer(playerName);
-        Game game = new Game(playerName, AIPlayerName);
+        Game game = new Game(playerName, "IA Player");
         game.Start();
     }
 }
