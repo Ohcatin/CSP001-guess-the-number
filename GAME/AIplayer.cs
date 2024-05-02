@@ -9,9 +9,10 @@ public class AIPlayer : Player
         _random = new Random();
     }
 
+    // Método para que el jugador AI haga una suposición
     public override void MakeGuess()
     {
-        int guess = _random.Next(1, 101);
+        int guess = GenerateRandomGuess();
         Predictions.Add(guess);
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("--------------------------------------------------");
@@ -19,5 +20,11 @@ public class AIPlayer : Player
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"{Name} hace una predicción: {guess}");
         Console.ResetColor();
+    }
+
+    // Método para generar una suposición aleatoria
+    private int GenerateRandomGuess()
+    {
+        return _random.Next(1, 101);
     }
 }

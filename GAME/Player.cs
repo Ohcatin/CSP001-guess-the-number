@@ -11,8 +11,10 @@ public abstract class Player
         Predictions = new List<int>();
     }
 
+    // Método abstracto para hacer una suposición
     public abstract void MakeGuess();
 
+    // Método para obtener las suposiciones realizadas por el jugador
     public List<int> GetPredictions()
     {
         return Predictions;

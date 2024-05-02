@@ -6,6 +6,7 @@ public class HumanPlayer : Player
     {
     }
 
+    // Método para que el jugador humano haga una suposición
     public override void MakeGuess()
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
@@ -15,15 +16,23 @@ public class HumanPlayer : Player
         Console.Write($"{Name}, por favor introduce tu intento: ");
         Console.ResetColor();
         string? input = Console.ReadLine();
-        int guess;
 
+        // Validar la entrada del usuario
+        int guess = ValidateInput(input);
+
+        Predictions.Add(guess);
+    }
+
+    // Método para validar la entrada del usuario y convertirla a entero
+    public int ValidateInput(string? input)
+    {
+        int guess;
         while (!int.TryParse(input, out guess))
         {
             Console.WriteLine("Por favor, introduce un número válido.");
             Console.Write($"Hola {Name}, por favor introduce tu intento: ");
             input = Console.ReadLine();
         }
-
-        Predictions.Add(guess);
+        return guess;
     }
 }

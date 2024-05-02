@@ -1,0 +1,4 @@
+TEST.UnitTest1.RandomNumberGenerator
+TEST.UnitTest1.PlayerConstructor_NameInitializedCorrectly
+TEST.UnitTest1.HumanPlayer_MakeGuess_ValidInput
+TEST.UnitTest1.AIPlayer_MakeGuess

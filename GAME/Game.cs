@@ -7,6 +7,7 @@ public class Game
     private Player _AIPlayer;
     private int _secretNumber;
 
+    // Constructor
     public Game(string humanPlayerName, string AIPlayerName)
     {
         _humanPlayer = new HumanPlayer(humanPlayerName);
@@ -14,6 +15,10 @@ public class Game
         _secretNumber = RandomNumberGenerator();
     }
 
+    // Propiedad para acceder al número secreto
+    public int SecretNumber => _secretNumber;
+
+    // Método para iniciar el juego
     public void Start()
     {
         Console.WriteLine($"¡Bienvenido al juego de adivinar el número, {_humanPlayer.Name}!");
@@ -38,12 +43,7 @@ public class Game
         }
     }
 
-    private int RandomNumberGenerator()
-    {
-        Random random = new Random();
-        return random.Next(1, 101);
-    }
-
+    // Método para verificar una suposición
     public bool CheckGuess(Player player)
     {
         List<int> predictions = player.GetPredictions();
@@ -62,5 +62,16 @@ public class Game
             Console.WriteLine($"El número secreto es menor que el intento de {player.Name}.");
         }
         return false;
+    }
+
+    // Método para generar un número aleatorio
+    private int RandomNumberGenerator()
+    {
+        Random random = new Random();
+        return random.Next(1, 101);
+    }
+    public string GetPlayerName()
+    {
+      return _humanPlayer.Name;
     }
 }
